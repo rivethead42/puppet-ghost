@@ -19,18 +19,18 @@
 # - support other operating systems
 
 define ghost::blog(
-  $blog   = $title,                                   # Name of blog
-  $user   = 'ghost',                                  # Ghost instance should run as its own user
-  $group  = 'ghost',
-  $home   = "/home/ghost/${title}",                   # Root of Ghost instance (will be created if it does not already exist)
-  $source = 'https://ghost.org/zip/ghost-latest.zip', # Source for ghost distribution
+  $blog           = $title,                                   # Name of blog
+  $user           = 'ghost',                                  # Ghost instance should run as its own user
+  $group          = 'ghost',
+  $home           = "/home/ghost/${title}",                   # Root of Ghost instance (will be created if it does not already exist)
+  $source         = 'https://ghost.org/zip/ghost-latest.zip', # Source for ghost distribution
+  $use_supervisor = true,                                     # User supervisor module to setup service for blog
 
   # The npm registry on some distributions needs to be set
   $manage_npm_registry = true,                          # Whether or not to attempt to set the npm registry (often needed)
   $npm_registry        = 'https://registry.npmjs.org/', # User's npm registry
 
   # Use [supervisor](http://supervisord.org/) to manage Ghost, with logging
-  $use_supervisor = true, # User supervisor module to setup service for blog
   $autorestart    = true, # Restart on crash
   $stdout_logfile = "/var/log/ghost_${title}.log",
   $stderr_logfile = "/var/log/ghost_${title}_err.log",
